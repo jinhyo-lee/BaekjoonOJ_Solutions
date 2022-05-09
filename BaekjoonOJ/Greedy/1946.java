@@ -26,13 +26,7 @@ public class Main {
 				p[j][1] = Integer.parseInt(st.nextToken());
 			}
 
-			Arrays.sort(p, new Comparator<int[]>() {
-				@Override
-				public int compare(int[] o1, int[] o2) {
-					
-					return Integer.compare(o1[0], o2[0]);
-				}
-			});
+			Arrays.sort(p, Comparator.comparingInt(o1 -> o1[0]));
 
 			int cnt = 1;
 			int rank = p[0][1];
