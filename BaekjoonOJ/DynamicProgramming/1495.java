@@ -4,28 +4,27 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 public class Main {
-
-	static int n, s, m;
-	static int[] dp;
 
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		StringTokenizer st;
 
-		String[] input = br.readLine().split(" ");
-		n = Integer.parseInt(input[0]);
-		s = Integer.parseInt(input[1]);
-		m = Integer.parseInt(input[2]);
+		st = new StringTokenizer(br.readLine());
+		int n = Integer.parseInt(st.nextToken());
+		int s = Integer.parseInt(st.nextToken());
+		int m = Integer.parseInt(st.nextToken());
 
-		dp = new int[m + 1];
+		int[] dp = new int[m + 1];
 		for (int i = 0; i <= m; i++) {
 			dp[i] = -1;
 		}
 
 		dp[s] = 0;
-		input = br.readLine().split(" ");
+		String[] input = br.readLine().split(" ");
 
 		for (int i = 1; i <= n; i++) {
 			int v = Integer.parseInt(input[i - 1]);
@@ -43,8 +42,8 @@ public class Main {
 				}
 			}
 
-			for (int n : list) {
-				dp[n] = i;
+			for (int j : list) {
+				dp[j] = i;
 			}
 		}
 
