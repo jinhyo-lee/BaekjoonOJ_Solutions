@@ -6,7 +6,7 @@ import java.io.OutputStreamWriter;
 import java.util.Arrays;
 
 public class Main {
-
+	
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -15,35 +15,31 @@ public class Main {
 		char[] str = br.readLine().toCharArray();
 		int[] dp = new int[n];
 		
-		final int max = 987654321;
-		Arrays.fill(dp, max);
-		dp[0] = 0;
-
-		for (int i = 0; i < n - 1; i++) {
+		int[] val = new int[n];
+		for (int i = 0; i < n; i++) {
 			if (str[i] == 'B') {
-				for (int j = i + 1; j < n; j++) {
-					if (str[j] == 'O') {
-						dp[j] = Math.min(dp[j], dp[i] + (j - i) * (j - i));
-					}
-				}
+				val[i] = 0;
 			} else if (str[i] == 'O') {
-				for (int j = i + 1; j < n; j++) {
-					if (str[j] == 'J') {
-						dp[j] = Math.min(dp[j], dp[i] + (j - i) * (j - i));
-					}
-				}
-			} else {
-				for (int j = i + 1; j < n; j++) {
-					if (str[j] == 'B') {
-						dp[j] = Math.min(dp[j], dp[i] + (j - i) * (j - i));
-					}
-				}
+				val[i] = 1;
+			} else if (str[i] == 'J') {
+				val[i] = 2;
 			}
 		}
 
-		if (dp[n - 1] == max) {
-			bw.write(-1 + "\n");
+		Arrays.fill(dp, Integer.MAX_VALUE);
+		dp[0] = 0;
 
+		for (int i = 1; i < n; i++) {
+			for (int j = 0; j < i; j++) {
+				if (val[j] != (val[i] + 2) % 3 || dp[j] == Integer.MAX_VALUE)
+					continue;
+				
+				dp[i] = Math.min(dp[i], dp[j] + (int) Math.pow(i - j, 2));
+			}
+		}
+
+		if (dp[n - 1] == Integer.MAX_VALUE) {
+			bw.write(-1 + "\n");
 		} else {
 			bw.write(dp[n - 1] + "\n");
 		}
