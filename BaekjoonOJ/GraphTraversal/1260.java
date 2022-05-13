@@ -1,0 +1,88 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+import java.util.StringTokenizer;
+
+public class Main {
+
+	static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+	static List<Integer>[] list;
+	static boolean[] check;
+
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+
+		st = new StringTokenizer(br.readLine());
+		int n = Integer.parseInt(st.nextToken());
+		int m = Integer.parseInt(st.nextToken());
+		int v = Integer.parseInt(st.nextToken());
+		
+		list = new ArrayList[n + 1];
+		for (int i = 1; i < n + 1; i++) {
+			list[i] = new ArrayList<Integer>();
+		}
+
+		for (int i = 0; i < m; i++) {
+			st = new StringTokenizer(br.readLine());
+			int x = Integer.parseInt(st.nextToken());
+			int y = Integer.parseInt(st.nextToken());
+
+			list[y].add(x);
+			list[x].add(y);
+		}
+
+		for (int i = 1; i < n + 1; i++) {
+			Collections.sort(list[i]);
+		}
+
+		check = new boolean[n + 1];
+		dfs(v);
+		bw.write("\n");
+
+		check = new boolean[n + 1];
+		bfs(v);
+
+		bw.flush();
+	}
+
+	private static void dfs(int visit) throws IOException {
+		if (check[visit]) {
+			return;
+		}
+
+		check[visit] = true;
+		bw.write(visit + " ");
+
+		for (int i : list[visit]) {
+			if (!check[i])
+				dfs(i);
+		}
+	}
+
+	private static void bfs(int start) throws IOException {
+		Queue<Integer> queue = new LinkedList<Integer>();
+		queue.add(start);
+		check[start] = true;
+
+		while (!queue.isEmpty()) {
+			int visit = queue.poll();
+			bw.write(visit + " ");
+
+			for (int i : list[visit]) {
+				if (!check[i]) {
+					check[i] = true;
+					queue.add(i);
+				}
+			}
+		}
+	}
+
+}
