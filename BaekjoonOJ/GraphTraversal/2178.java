@@ -42,16 +42,14 @@ public class Main {
 	}
 
 	private static void bfs(int x, int y) {
-		Queue<int[]> q = new LinkedList<>();
-		q.add(new int[] {x, y});
+		Queue<Loc> q = new LinkedList<>();
+		q.add(new Loc(x, y));
 
 		while (!q.isEmpty()) {
-			int[] now = q.poll();
-			int nowX = now[0];
-			int nowY = now[1];
+			Loc now = q.poll();
 			for (int i = 0; i < 4; i++) {
-				int nextX = nowX + dx[i];
-				int nextY = nowY + dy[i];
+				int nextX = now.x + dx[i];
+				int nextY = now.y + dy[i];
 
 				if (nextX < 0 || nextY < 0 || nextX >= n || nextY >= m) {
 					continue;
@@ -60,11 +58,21 @@ public class Main {
 					continue;
 				}
 
-				q.add(new int[ ] {nextX, nextY});
-				maze[nextX][nextY] = maze[nowX][nowY] + 1;
+				q.add(new Loc(nextX, nextY));
+				maze[nextX][nextY] = maze[now.x][now.y] + 1;
 				visited[nextX][nextY] = true;
 			}
 		}	
+	}
+
+	private static class Loc {
+		int x;
+		int y;
+
+		Loc(int x, int y) {
+			this.x = x;
+			this.y = y;
+		}
 	}
 
 }
