@@ -6,28 +6,26 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class Main {
 
 	static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-	static List<Integer>[] list;
+	static ArrayList<ArrayList<Integer>> list;
 	static boolean[] check;
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String args[]) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer st;
+		StringTokenizer st = new StringTokenizer(br.readLine());
 
-		st = new StringTokenizer(br.readLine());
 		int n = Integer.parseInt(st.nextToken());
 		int m = Integer.parseInt(st.nextToken());
 		int v = Integer.parseInt(st.nextToken());
-		
-		list = new ArrayList[n + 1];
-		for (int i = 1; i < n + 1; i++) {
-			list[i] = new ArrayList<Integer>();
+
+		list = new ArrayList<>();
+		for (int i = 0; i < n + 1; i++) {
+			list.add(new ArrayList<>());
 		}
 
 		for (int i = 0; i < m; i++) {
@@ -35,12 +33,12 @@ public class Main {
 			int x = Integer.parseInt(st.nextToken());
 			int y = Integer.parseInt(st.nextToken());
 
-			list[y].add(x);
-			list[x].add(y);
+			list.get(x).add(y);
+			list.get(y).add(x);
 		}
 
-		for (int i = 1; i < n + 1; i++) {
-			Collections.sort(list[i]);
+		for (int i = 1; i <= n; i++) {
+			Collections.sort(list.get(i));
 		}
 
 		check = new boolean[n + 1];
@@ -53,33 +51,33 @@ public class Main {
 		bw.flush();
 	}
 
-	private static void dfs(int visit) throws IOException {
-		if (check[visit]) {
+	public static void dfs(int visit) throws IOException {
+		if (check[visit])
 			return;
-		}
 
 		check[visit] = true;
 		bw.write(visit + " ");
 
-		for (int i : list[visit]) {
-			if (!check[i])
+		for (int i : list.get(visit)) {
+			if (!check[i]) {
 				dfs(i);
+			}
 		}
 	}
 
-	private static void bfs(int start) throws IOException {
-		Queue<Integer> queue = new LinkedList<Integer>();
-		queue.add(start);
+	public static void bfs(int start) throws IOException {
+		Queue<Integer> q = new LinkedList<>();
+		q.offer(start);
 		check[start] = true;
 
-		while (!queue.isEmpty()) {
-			int visit = queue.poll();
+		while (!q.isEmpty()) {
+			int visit = q.poll();
 			bw.write(visit + " ");
 
-			for (int i : list[visit]) {
+			for (int i : list.get(visit)) {
 				if (!check[i]) {
 					check[i] = true;
-					queue.add(i);
+					q.offer(i);
 				}
 			}
 		}
