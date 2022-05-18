@@ -6,7 +6,7 @@ import java.io.OutputStreamWriter;
 import java.util.StringTokenizer;
 
 public class Main {
-	
+
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -19,12 +19,13 @@ public class Main {
 		for (int i = 1; i <= n; i++) {
 			st = new StringTokenizer(br.readLine());
 			for (int j = 1; j <= n; j++) {
-				int val = Integer.parseInt(st.nextToken());
-				if (val != 0) {
-					if (i + val <= n)
-						dp[i + val][j] += dp[i][j];
-					if (j + val <= n)
-						dp[i][j + val] += dp[i][j];
+				int dist = Integer.parseInt(st.nextToken());
+
+				if (dp[i][j] >= 1 && dist != 0) {
+					if (j + dist <= n)
+						dp[i][j + dist] += dp[i][j];
+					if (i + dist <= n)
+						dp[i + dist][j] += dp[i][j];					
 				}
 			}
 		}
@@ -32,5 +33,5 @@ public class Main {
 		bw.write(dp[n][n] + "\n");
 		bw.flush();
 	}
-	
+
 }
