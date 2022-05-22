@@ -7,7 +7,7 @@ import java.util.StringTokenizer;
 
 public class Main {
 
-	static boolean[][] c;
+	static boolean[][] arr;
 	static int min = 64;
 
 	public static void main(String[] args) throws IOException {
@@ -18,14 +18,14 @@ public class Main {
 		int n = Integer.parseInt(st.nextToken());
 		int m = Integer.parseInt(st.nextToken());
 
-		c = new boolean[n][m];
+		arr = new boolean[n][m];
 		for (int i = 0; i < n; i++) {
 			String s = br.readLine();
 			for (int j = 0; j < m; j++) {
 				if (s.charAt(j) == 'W') {
-					c[i][j] = true;
+					arr[i][j] = true;
 				} else {
-					c[i][j] = false;
+					arr[i][j] = false;
 				}
 			}
 		}
@@ -42,15 +42,15 @@ public class Main {
 		bw.flush();
 	}
 
-	private static void match(int row, int col) {
-		int y = row + 8;
-		int x = col + 8;
-
-		boolean chk = c[row][col];
+	private static void match(int y, int x) {
+		int Y = y + 8;
+		int X = x + 8;
+		boolean chk = arr[y][x];
+		
 		int cnt = 0;
-		for (int i = row; i < y; i++) {
-			for (int j = col; j < x; j++) {
-				if (chk != c[i][j])
+		for (int i = y; i < Y; i++) {
+			for (int j = x; j < X; j++) {
+				if (chk != arr[i][j])
 					cnt++;
 
 				chk = (!chk);
@@ -58,8 +58,8 @@ public class Main {
 			chk = !chk;
 		}
 		
-		cnt = Math.min(cnt, 64 - cnt);
-		min = Math.min(min, cnt);
+
+		min = Math.min(min, Math.min(cnt, 64 - cnt));
 	}
 
 }
