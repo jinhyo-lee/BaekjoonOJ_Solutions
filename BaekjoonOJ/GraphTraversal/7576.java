@@ -12,8 +12,8 @@ public class Main {
 	static int n;
 	static int[][] box;
 	static Queue<Loc> q;
-	static int[] dx = { -1, 1, 0, 0 };
-	static int[] dy = { 0, 0, -1, 1 };
+	static int[] dy = { -1, 1, 0, 0 };
+	static int[] dx = { 0, 0, -1, 1 };
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -44,18 +44,18 @@ public class Main {
 		while (!q.isEmpty()) {
 			Loc now = q.poll();
 			for (int i = 0; i < 4; i++) {
-				int nextX = now.x + dx[i];
 				int nextY = now.y + dy[i];
+				int nextX = now.x + dx[i];
 
-				if (nextX < 0 || nextY < 0 || nextX >= n || nextY >= m) {
+				if (nextY < 0 || nextX < 0 || nextY >= n || nextX >= m) {
 					continue;
 				}
-				if (box[nextX][nextY] != 0) {
+				if (box[nextY][nextX] != 0) {
 					continue;
 				}
 
-				box[nextX][nextY] = box[now.x][now.y] + 1;
-				q.add(new Loc(nextX, nextY));
+				box[nextY][nextX] = box[now.y][now.x] + 1;
+				q.add(new Loc(nextY, nextX));
 			}
 		}
 
@@ -75,12 +75,12 @@ public class Main {
 	}
 
 	private static class Loc {
-		int x;
 		int y;
+		int x;
 
-		public Loc(int x, int y) {
-			this.x = x;
+		public Loc(int y, int x) {
 			this.y = y;
+			this.x = x;
 		}
 	}
 
