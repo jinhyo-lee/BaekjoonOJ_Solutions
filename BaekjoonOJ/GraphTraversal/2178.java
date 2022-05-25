@@ -7,14 +7,14 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class Main {
+public class P2178 {
 
 	static int n;
 	static int m;
 	static int[][] maze;
 	static boolean[][] visited;
-	static int[] dx = { -1, 1, 0, 0 };
-	static int[] dy = { 0, 0, -1, 1 };
+	static int[] dy = { -1, 1, 0, 0 };
+	static int[] dx = { 0, 0, -1, 1 };
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -41,37 +41,37 @@ public class Main {
 		bw.flush();
 	}
 
-	private static void bfs(int x, int y) {
+	private static void bfs(int y, int x) {
 		Queue<Loc> q = new LinkedList<>();
-		q.add(new Loc(x, y));
+		q.add(new Loc(y, x));
 
 		while (!q.isEmpty()) {
 			Loc now = q.poll();
 			for (int i = 0; i < 4; i++) {
-				int nextX = now.x + dx[i];
 				int nextY = now.y + dy[i];
+				int nextX = now.x + dx[i];
 
-				if (nextX < 0 || nextY < 0 || nextX >= n || nextY >= m) {
+				if (nextY < 0 || nextX < 0 || nextY >= n || nextX >= m) {
 					continue;
 				}
-				if (visited[nextX][nextY] || maze[nextX][nextY] == 0) {
+				if (visited[nextY][nextX] || maze[nextY][nextX] == 0) {
 					continue;
 				}
 
-				q.add(new Loc(nextX, nextY));
-				maze[nextX][nextY] = maze[now.x][now.y] + 1;
-				visited[nextX][nextY] = true;
+				q.add(new Loc(nextY, nextX));
+				maze[nextY][nextX] = maze[now.y][now.x] + 1;
+				visited[nextY][nextX] = true;
 			}
 		}	
 	}
 
 	private static class Loc {
-		int x;
 		int y;
+		int x;
 
-		Loc(int x, int y) {
-			this.x = x;
+		Loc(int y, int x) {
 			this.y = y;
+			this.x = x;
 		}
 	}
 
