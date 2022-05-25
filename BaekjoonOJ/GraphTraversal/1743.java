@@ -12,8 +12,8 @@ public class Main {
 	static int n;
 	static int m;
 	static int[][] floor;
-	static int[] dx = { -1, 1, 0, 0 };
-	static int[] dy = { 0, 0, -1, 1 };
+	static int[] dy = { -1, 1, 0, 0 };
+	static int[] dx = { 0, 0, -1, 1 };
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -46,24 +46,24 @@ public class Main {
 		bw.flush();
 	}
 
-	private static int bfs(int x, int y) {
+	private static int bfs(int y, int x) {
 		Queue<Loc> q = new LinkedList<>();
-		q.offer(new Loc(x, y));
+		q.offer(new Loc(y, x));
 
 		int cnt = 1;
 		while (!q.isEmpty()) {
 			Loc now = q.poll();
 			for (int i = 0; i < 4; i++) {
-				int nextX = now.x + dx[i];
 				int nextY = now.y + dy[i];
+				int nextX = now.x + dx[i];
 
-				if (nextX < 0 || nextY < 0 || nextX >= n || nextY >= m)
+				if (nextY < 0 || nextX < 0 || nextY >= n || nextX >= m)
 					continue;
-				if (floor[nextX][nextY] == 0)
+				if (floor[nextY][nextX] == 0)
 					continue;
 
-				q.offer(new Loc(nextX, nextY));
-				floor[nextX][nextY] = 0;
+				q.offer(new Loc(nextY, nextX));
+				floor[nextY][nextX] = 0;
 				cnt++;
 			}
 		}
@@ -72,12 +72,12 @@ public class Main {
 	}
 
 	private static class Loc {
-		int x;
 		int y;
+		int x;
 
-		Loc(int x, int y) {
-			this.x = x;
+		Loc(int y, int x) {
 			this.y = y;
+			this.x = x;
 		}
 	}
 
