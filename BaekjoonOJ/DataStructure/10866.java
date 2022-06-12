@@ -20,9 +20,8 @@ public class Main {
 
 			if (comm[0].equals("push_front"))
 				dq.push(Integer.parseInt(comm[1]));
-			if (comm[0].equals("push_back")) {
+			if (comm[0].equals("push_back")) 
 				dq.offer(Integer.parseInt(comm[1]));
-			}
 
 			if (comm[0].equals("pop_front"))
 				if (dq.isEmpty())
