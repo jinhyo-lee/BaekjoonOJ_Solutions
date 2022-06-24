@@ -54,35 +54,35 @@ public class Main {
 
 		switch (dir) {
 		case 1:
-			dice[0] = dice[4];
-			dice[4] = dice[1];
-			dice[1] = dice[5];
-			dice[5] = tmp;
+			dice[0] = dice[3];
+			dice[3] = dice[5];
+			dice[5] = dice[2];
+			dice[2] = tmp;
 			break;
 		case 2:
-			dice[0] = dice[5];
-			dice[5] = dice[1];
-			dice[1] = dice[4];
-			dice[4] = tmp;
-			break;
-		case 3:
 			dice[0] = dice[2];
-			dice[2] = dice[1];
-			dice[1] = dice[3];
+			dice[2] = dice[5];
+			dice[5] = dice[3];
 			dice[3] = tmp;
 			break;
+		case 3:
+			dice[0] = dice[1];
+			dice[1] = dice[5];
+			dice[5] = dice[4];
+			dice[4] = tmp;
+			break;
 		case 4:
-			dice[0] = dice[3];
-			dice[3] = dice[1];
-			dice[1] = dice[2];
-			dice[2] = tmp;
+			dice[0] = dice[4];
+			dice[4] = dice[5];
+			dice[5] = dice[1];
+			dice[1] = tmp;
 			break;
 		}
 
 		if (map[y][x] == 0)
-			map[y][x] = dice[1];
+			map[y][x] = dice[5];
 		else {
-			dice[1] = map[y][x];
+			dice[5] = map[y][x];
 			map[y][x] = 0;
 		}
 
