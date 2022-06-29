@@ -30,9 +30,8 @@ public class Main {
 			for (int j = 0; j < m; j++) {
 				box[i][j] = Integer.parseInt(s[j]);
 
-				if (box[i][j] == 1) {
-					q.add(new Loc(i, j));
-				}
+				if (box[i][j] == 1)
+					q.offer(new Loc(i, j));
 			}
 		}
 
@@ -47,15 +46,13 @@ public class Main {
 				int nextY = now.y + dy[i];
 				int nextX = now.x + dx[i];
 
-				if (nextY < 0 || nextX < 0 || nextY >= n || nextX >= m) {
+				if (nextY < 0 || nextX < 0 || nextY >= n || nextX >= m)
 					continue;
-				}
-				if (box[nextY][nextX] != 0) {
+				if (box[nextY][nextX] != 0)
 					continue;
-				}
 
 				box[nextY][nextX] = box[now.y][now.x] + 1;
-				q.add(new Loc(nextY, nextX));
+				q.offer(new Loc(nextY, nextX));
 			}
 		}
 
@@ -66,7 +63,7 @@ public class Main {
 					day = -1;
 					return day;
 				}
-				
+
 				day = Math.max(day, box[i][j]);
 			}
 		}
