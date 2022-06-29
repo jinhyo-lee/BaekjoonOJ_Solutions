@@ -12,7 +12,7 @@ public class Main {
 	static int n;
 	static int m;
 	static int[][] maze;
-	static boolean[][] visited;
+	static boolean[][] visit;
 	static int[] dy = { -1, 1, 0, 0 };
 	static int[] dx = { 0, 0, -1, 1 };
 
@@ -27,13 +27,12 @@ public class Main {
 		maze = new int[n][m];
 		for (int i = 0; i < n; i++) {
 			String s = br.readLine();
-			for (int j = 0; j < m; j++) {
+			for (int j = 0; j < m; j++) 
 				maze[i][j] = s.charAt(j) - '0';
-			}
 		}
 
-		visited = new boolean[n][m];
-		visited[0][0] = true;
+		visit = new boolean[n][m];
+		visit[0][0] = true;
 
 		bfs(0, 0);
 
@@ -43,7 +42,7 @@ public class Main {
 
 	private static void bfs(int y, int x) {
 		Queue<Loc> q = new LinkedList<>();
-		q.add(new Loc(y, x));
+		q.offer(new Loc(y, x));
 
 		while (!q.isEmpty()) {
 			Loc now = q.poll();
@@ -51,18 +50,16 @@ public class Main {
 				int nextY = now.y + dy[i];
 				int nextX = now.x + dx[i];
 
-				if (nextY < 0 || nextX < 0 || nextY >= n || nextX >= m) {
+				if (nextY < 0 || nextX < 0 || nextY >= n || nextX >= m)
 					continue;
-				}
-				if (visited[nextY][nextX] || maze[nextY][nextX] == 0) {
+				if (visit[nextY][nextX] || maze[nextY][nextX] == 0)
 					continue;
-				}
 
-				q.add(new Loc(nextY, nextX));
+				q.offer(new Loc(nextY, nextX));
 				maze[nextY][nextX] = maze[now.y][now.x] + 1;
-				visited[nextY][nextX] = true;
+				visit[nextY][nextX] = true;
 			}
-		}	
+		}
 	}
 
 	private static class Loc {
