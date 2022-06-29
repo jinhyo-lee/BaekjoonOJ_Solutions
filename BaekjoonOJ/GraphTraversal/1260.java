@@ -11,7 +11,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class P1260 {
+public class Main {
 
 	static StringBuilder sb = new StringBuilder();
 	static ArrayList<ArrayList<Integer>> list;
