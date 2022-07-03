@@ -30,11 +30,11 @@ public class Main {
 
 		for (int i = 0; i < m; i++) {
 			st = new StringTokenizer(br.readLine());
-			int x = Integer.parseInt(st.nextToken());
 			int y = Integer.parseInt(st.nextToken());
+			int x = Integer.parseInt(st.nextToken());
 
-			list.get(x).add(y);
 			list.get(y).add(x);
+			list.get(x).add(y);
 		}
 
 		for (int i = 1; i <= n; i++)
@@ -51,7 +51,7 @@ public class Main {
 		bw.flush();
 	}
 
-	public static void dfs(int node) throws IOException {
+	private static void dfs(int node) {
 		if (visit[node])
 			return;
 
@@ -64,16 +64,16 @@ public class Main {
 		}
 	}
 
-	public static void bfs(int node) throws IOException {
+	private static void bfs(int node) {
 		Queue<Integer> q = new LinkedList<>();
 		q.offer(node);
 		visit[node] = true;
 
 		while (!q.isEmpty()) {
-			int next = q.poll();
-			sb.append(next + " ");
+			int now = q.poll();
+			sb.append(now + " ");
 
-			for (int i : list.get(next)) {
+			for (int i : list.get(now)) {
 				if (!visit[i]) {
 					visit[i] = true;
 					q.offer(i);
