@@ -30,7 +30,7 @@ public class Main {
 			map = new int[h][w];
 			for (int i = 0; i < h; i++) {
 				st = new StringTokenizer(br.readLine());
-				for (int j = 0; j < w; j++) 
+				for (int j = 0; j < w; j++)
 					map[i][j] = Integer.parseInt(st.nextToken());
 			}
 
@@ -52,12 +52,12 @@ public class Main {
 	}
 
 	private static void bfs(int y, int x) {
-		Queue<Loc> q = new LinkedList<>();
-		q.offer(new Loc(y, x));
+		Queue<Node> q = new LinkedList<>();
+		q.offer(new Node(y, x));
 		map[y][x] = 0;
 
 		while (!q.isEmpty()) {
-			Loc now = q.poll();
+			Node now = q.poll();
 			for (int i = 0; i < 8; i++) {
 				int ny = now.y + dy[i];
 				int nx = now.x + dx[i];
@@ -67,17 +67,17 @@ public class Main {
 				if (map[ny][nx] == 0)
 					continue;
 
-				q.offer(new Loc(ny, nx));
+				q.offer(new Node(ny, nx));
 				map[ny][nx] = 0;
 			}
 		}
 	}
 
-	private static class Loc {
+	private static class Node {
 		int y;
 		int x;
 
-		Loc(int y, int x) {
+		Node(int y, int x) {
 			this.y = y;
 			this.x = x;
 		}
