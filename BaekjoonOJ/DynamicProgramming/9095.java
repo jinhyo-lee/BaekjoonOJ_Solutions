@@ -13,12 +13,12 @@ public class Main {
 		int t = Integer.parseInt(br.readLine());
 
 		for (int i = 0; i < t; i++)
-			bw.write(sum(Integer.parseInt(br.readLine())) + "\n");
+			bw.write(getSum(Integer.parseInt(br.readLine())) + "\n");
 
 		bw.flush();
 	}
 
-	private static int sum(int n) {
+	private static int getSum(int n) {
 		int[] dp = new int[11];
 
 		dp[1] = 1;
