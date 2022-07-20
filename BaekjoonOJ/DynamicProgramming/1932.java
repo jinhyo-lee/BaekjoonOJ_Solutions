@@ -23,7 +23,7 @@ public class Main {
 
 		for (int i = n - 1; i > 0; i--) {
 			for (int j = 0; j < i; j++)
-				arr[i - 1][j] = Math.max(arr[i - 1][j] + arr[i][j], arr[i - 1][j] + arr[i][j + 1]);
+				arr[i - 1][j] += Math.max(arr[i][j], arr[i][j + 1]);
 		}
 
 		bw.write(arr[0][0] + "\n");
