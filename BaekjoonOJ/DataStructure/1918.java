@@ -45,12 +45,10 @@ public class Main {
 	private static int priority(char oper) {
 		if (oper == '(')
 			return 0;
-		if (oper == '+' || oper == '-')
+		else if (oper == '+' || oper == '-')
 			return 1;
-		if (oper == '*' || oper == '/')
+		else
 			return 2;
-
-		return -1;
 	}
 
 }
