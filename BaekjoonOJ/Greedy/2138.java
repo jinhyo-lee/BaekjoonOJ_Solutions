@@ -48,7 +48,7 @@ public class Main {
 	private static void swap(int idx) {
 		for (int i = idx - 1; i <= idx + 1; i++) {
 			if (i >= 0 && i < n)
-				input[i] = (char) (input[i] ^ 1);
+				input[i] ^= 1;
 		}
 	}
 
