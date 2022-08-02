@@ -36,6 +36,7 @@ public class Main {
 
 	private static void recur(int idx, int cnt) {
 		if (cnt == list.size()) {
+			flag = true;
 			for (int i = 0; i < 9; i++) {
 				for (int j = 0; j < 9; j++) 
 					sb.append(map[i][j] + " ");
@@ -43,11 +44,10 @@ public class Main {
 				sb.append("\n");
 			}
 			
-			flag = true;
 			return;
 		}
 
-		if (flag || idx >= list.size())
+		if (flag)
 			return;
 
 		int y = list.get(idx).y;
