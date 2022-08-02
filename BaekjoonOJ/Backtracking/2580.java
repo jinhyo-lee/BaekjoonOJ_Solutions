@@ -28,14 +28,14 @@ public class Main {
 			}
 		}
 
-		recur(0, 0);
+		recur(0);
 		
 		bw.write(sb + "\n");
 		bw.flush();
 	}
 
-	private static void recur(int idx, int cnt) {
-		if (cnt == list.size()) {
+	private static void recur(int idx) {
+		if (idx == list.size()) {
 			flag = true;
 			for (int i = 0; i < 9; i++) {
 				for (int j = 0; j < 9; j++) 
@@ -56,7 +56,7 @@ public class Main {
 		for (int i = 1; i <= 9; i++) {
 			if (check(y, x, i)) {
 				map[y][x] = i;
-				recur(idx + 1, cnt + 1);
+				recur(idx + 1);
 				map[y][x] = 0;
 			}
 		}
