@@ -20,8 +20,8 @@ public class Main {
         l = Integer.parseInt(st.nextToken());
         r = Integer.parseInt(st.nextToken());
         x = Integer.parseInt(st.nextToken());
-
         arr = new int[n];
+
         st = new StringTokenizer(br.readLine());
         for (int i = 0; i < n; i++)
             arr[i] = Integer.parseInt(st.nextToken());
