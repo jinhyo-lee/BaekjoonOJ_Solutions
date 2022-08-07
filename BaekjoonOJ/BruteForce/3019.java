@@ -32,29 +32,29 @@ public class Main {
                 check("00");
                 break;
             case 3:
-                check("110");
-                check("01");
+                check("001");
+                check("10");
                 break;
             case 4:
-                check("011");
-                check("10");
+                check("100");
+                check("01");
                 break;
             case 5:
                 check("000");
-                check("10");
-                check("010");
                 check("01");
+                check("101");
+                check("10");
                 break;
             case 6:
                 check("000");
                 check("00");
-                check("100");
-                check("02");
+                check("011");
+                check("20");
                 break;
             case 7:
                 check("000");
-                check("20");
-                check("001");
+                check("02");
+                check("110");
                 check("00");
                 break;
         }
@@ -67,11 +67,11 @@ public class Main {
         int len = block.length();
 
         for (int i = 0; i <= c - len; i++) {
-            int gap = block.charAt(0) - '0' + map[i];
+            int gap = map[i] - block.charAt(0) - '0';
 
             boolean flag = true;
-            for (int j = 0; j < len; j++) {
-                if (block.charAt(j) - '0' + map[i + j] != gap) {
+            for (int j = 1; j < len; j++) {
+                if (map[i + j] - block.charAt(j) - '0' != gap) {
                     flag = false;
                     break;
                 }
