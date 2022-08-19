@@ -76,7 +76,6 @@ public class Main {
         int node, weight;
 
         public Edge(int node, int weight) {
-
             this.node = node;
             this.weight = weight;
         }
