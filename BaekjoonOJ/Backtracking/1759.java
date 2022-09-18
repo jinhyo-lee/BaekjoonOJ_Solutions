@@ -37,31 +37,34 @@ public class Main {
     }
 
     private static void recur(int idx, int depth) {
-        if (depth == l) {
-            int vow = 0;
-            int cons = 0;
-
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < c; i++) {
-                if (visit[i]) {
-                    sb.append(code[i]);
-
-                    if (isVowel(code[i]))
-                        vow++;
-                    else
-                        cons++;
-                }
-            }
-
-            if (vow >= 1 && cons >= 2)
-                result.append(sb + "\n");
-        }
+        if (depth == l)
+            generate();
 
         for (int i = idx; i < c; i++) {
             visit[i] = true;
             recur(i + 1, depth + 1);
             visit[i] = false;
         }
+    }
+
+    private static void generate() {
+        int vow = 0;
+        int cons = 0;
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < c; i++) {
+            if (visit[i]) {
+                sb.append(code[i]);
+
+                if (isVowel(code[i]))
+                    vow++;
+                else
+                    cons++;
+            }
+        }
+
+        if (vow >= 1 && cons >= 2)
+            result.append(sb + "\n");
     }
 
     private static boolean isVowel(char ch) {
