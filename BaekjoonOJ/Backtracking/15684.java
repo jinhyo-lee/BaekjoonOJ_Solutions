@@ -22,11 +22,11 @@ public class Main {
         h = Integer.parseInt(st.nextToken());
 
         map = new boolean[h + 1][n + 1];
+
         for (int i = 0; i < m; i++) {
             st = new StringTokenizer(br.readLine());
             int y = Integer.parseInt(st.nextToken());
             int x = Integer.parseInt(st.nextToken());
-
             map[y][x] = true;
         }
 
