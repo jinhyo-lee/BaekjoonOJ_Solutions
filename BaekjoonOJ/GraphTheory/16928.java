@@ -41,22 +41,24 @@ public class Main {
 
     private static void bfs() {
         Queue<Pair> q = new LinkedList<>();
-
-        q.add(new Pair(1, 0));
+        q.offer(new Pair(1, 0));
         visit[1] = true;
 
         while (!q.isEmpty()) {
             Pair now = q.poll();
+
             if (now.node == 100) {
                 res = now.cnt;
                 return;
             }
+
             for (int i = 1; i <= 6; i++) {
                 int next = now.node + i;
                 if (next <= 100 && !visit[next]) {
                     visit[next] = true;
                     if (map.containsKey(next))
                         next = map.get(next);
+
                     q.offer(new Pair(next, now.cnt + 1));
                 }
             }
