@@ -43,15 +43,16 @@ public class Main {
             return;
         }
 
-        if (visit[pairs[depth].x] || visit[pairs[depth].y])
+        int x = pairs[depth].x;
+        int y = pairs[depth].y;
+
+        if (visit[x] || visit[y])
             recur(depth + 1, cnt);
         else {
-            visit[pairs[depth].x] = true;
-            visit[pairs[depth].y] = true;
+            visit[x] = visit[y] = true;
             recur(depth + 1, cnt + 1);
 
-            visit[pairs[depth].x] = false;
-            visit[pairs[depth].y] = false;
+            visit[x] = visit[y] = false;
             recur(depth + 1, cnt);
         }
     }
