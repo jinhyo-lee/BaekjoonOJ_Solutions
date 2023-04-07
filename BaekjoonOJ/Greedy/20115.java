@@ -15,18 +15,16 @@ public class Main {
         int n = Integer.parseInt(br.readLine());
 
         long sum = 0;
-        double max = 0;
+        int max = 0;
 
         st = new StringTokenizer(br.readLine());
         while (n-- > 0) {
-            long d = Long.parseLong(st.nextToken());
-            sum += d;
-            max = Math.max(max, d);
+            int i = Integer.parseInt(st.nextToken());
+            sum += i;
+            max = Math.max(max, i);
         }
 
-        max = (max + sum) / 2;
-
-        bw.write(String.valueOf(max));
+        bw.write(String.valueOf((max + sum) / 2d));
         bw.flush();
     }
 
