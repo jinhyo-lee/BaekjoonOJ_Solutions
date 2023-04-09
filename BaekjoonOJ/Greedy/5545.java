@@ -27,8 +27,8 @@ public class Main {
         Arrays.sort(arr);
 
         int cal = c, cost = a, max = c / a;
-        for (int i = n - 1; i >= 0; i--) {
-            cal += arr[i];
+        while (n-- > 0) {
+            cal += arr[n];
             cost += b;
 
             if (cal / cost >= max)
