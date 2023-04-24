@@ -23,7 +23,7 @@ public class Main {
 
         int cnt = 0;
         while (m-- > 0) {
-            if (trie.startWith(br.readLine()))
+            if (trie.startsWith(br.readLine()))
                 cnt++;
         }
 
@@ -58,7 +58,7 @@ public class Main {
             node.isWord = true;
         }
 
-        public boolean startWith(String prefix) {
+        public boolean startsWith(String prefix) {
             TrieNode node = root;
             for (char c : prefix.toCharArray()) {
                 if (!node.child.containsKey(c))
