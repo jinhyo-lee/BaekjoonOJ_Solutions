@@ -48,15 +48,13 @@ public class Main {
             } else {
                 for (int j = 1; j <= n; j++) {
                     if (area[j].car == -car) {
-                        area[j].car = 0;
-                        income += area[j].cost * weight[-car];
-
-                        if (!q.isEmpty())
+                        if (q.isEmpty()) {
+                            area[j].car = 0;
+                            size--;
+                        } else
                             area[j].car = q.poll();
 
-                        if (area[j].car == 0)
-                            size--;
-
+                        income += area[j].cost * weight[-car];
                         break;
                     }
                 }
