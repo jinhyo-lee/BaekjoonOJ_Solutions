@@ -29,18 +29,22 @@ public class Main {
         Queue<Integer> q = new LinkedList<>();
 
         int income = 0;
+        int size = 0;
         loop:
         for (int i = 0; i < m * 2; i++) {
             int car = Integer.parseInt(br.readLine());
 
             if (car > 0) {
-                for (int j = 1; j <= n; j++) {
-                    if (area[j].car == 0) {
-                        area[j].car = car;
-                        continue loop;
+                if (size < n) {
+                    for (int j = 1; j <= n; j++) {
+                        if (area[j].car == 0) {
+                            area[j].car = car;
+                            size++;
+                            continue loop;
+                        }
                     }
-                }
-                q.offer(car);
+                } else
+                    q.offer(car);
             } else {
                 for (int j = 1; j <= n; j++) {
                     if (area[j].car == -car) {
@@ -49,6 +53,9 @@ public class Main {
 
                         if (!q.isEmpty())
                             area[j].car = q.poll();
+
+                        if (area[j].car == 0)
+                            size--;
 
                         break;
                     }
