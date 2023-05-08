@@ -41,9 +41,9 @@ public class Main {
             int div = input / 10;
             int cut = input % 10 == 0 ? div - 1 : div;
 
-            if (cut == 0) {
+            if (cut == 0)
                 cnt++;
-            } else {
+            else {
                 if (cut > m) {
                     cnt += m;
                     break;
