@@ -30,7 +30,7 @@ public class Main {
 
     private static int recur(int sum, int idx) {
         if (sum > c)
-            return 0;
+            return -1;
 
         if (idx == arr.length)
             return sum;
