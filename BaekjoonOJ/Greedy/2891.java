@@ -21,25 +21,21 @@ public class Main {
         Arrays.fill(arr, 1);
 
         st = new StringTokenizer(br.readLine());
-        while (s-- > 0)
-            arr[Integer.parseInt(st.nextToken())]--;
+        while (s-- > 0) arr[Integer.parseInt(st.nextToken())]--;
 
         st = new StringTokenizer(br.readLine());
-        while (r-- > 0) {
-            int tmp = Integer.parseInt(st.nextToken());
-            arr[tmp]++;
+        while (r-- > 0) arr[Integer.parseInt(st.nextToken())]++;
 
-            if (arr[tmp] == 2 && arr[tmp - 1] == 0)
-                arr[tmp - 1]++;
-            else if (arr[tmp] == 2 && arr[tmp + 1] == 0)
-                arr[tmp + 1]++;
+        for (int i = 1; i <= n; i++) {
+            if (arr[i] == 2) {
+                if (arr[i - 1] == 0) arr[i - 1]++;
+                else if (arr[i + 1] == 0) arr[i + 1]++;
+            }
         }
 
         int cnt = 0;
-        for (int i = 1; i <= n; i++) {
-            if (arr[i] == 0)
-                cnt++;
-        }
+        for (int i = 1; i <= n; i++)
+            if (arr[i] == 0) cnt++;
 
         bw.write(String.valueOf(cnt));
         bw.flush();
