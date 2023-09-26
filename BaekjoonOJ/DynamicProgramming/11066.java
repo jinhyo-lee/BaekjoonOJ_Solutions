@@ -1,70 +1,42 @@
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.InputStreamReader;
+import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.util.StringTokenizer;
 
 public class Main {
 
-	public static void main(String[] args) throws Exception {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	public static void main(String[] args) throws IOException {
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		StringTokenizer st;
+		StringBuilder sb = new StringBuilder();
 
-		int t = Integer.parseInt(br.readLine());
-
-		for (int i = 0; i < t; i++) {
-			int k = Integer.parseInt(br.readLine());
-			int[] files = new int[k];
-
-			st = new StringTokenizer(br.readLine());
-			for (int j = 0; j < files.length; j++) {
-				files[j] = Integer.parseInt(st.nextToken());
-			}
+		int t = read();
+		while (t-- > 0) {
+			int k = read() + 1;
 
 			int[] sum = new int[k];
-			sum[0] = files[0];
+			for (int i = 1; i < k; i++) sum[i] = sum[i - 1] + read();
 
-			for (int s = 1; s < sum.length; s++) {
-				sum[s] = sum[s - 1] + files[s];
-			}
-
-			bw.write(String.valueOf(solution(files, sum)));
-			bw.newLine();
-		}
-
-		bw.flush();
-		bw.close();
-	}
-
-	private static int solution(int[] files, int[] sum) {
-		int[][] dp = new int[files.length][files.length];
-
-		for (int i = 0; i < dp.length - 1; i++) {
-			dp[i][i + 1] = files[i] + files[i + 1];
-		}
-
-		for (int j = 2; j < dp.length; j++) {
-			for (int i = 0; i + j < dp.length; i++) {
-				for (int k = i; k < i + j; k++) {
-					if (dp[i][i + j] == 0) {
-						dp[i][i + j] = dp[i][k] + dp[k + 1][i + j] + sumDist(sum, i, i + j);
-					} else {
-						dp[i][i + j] = Math.min(dp[i][i + j], dp[i][k] + dp[k + 1][i + j] + sumDist(sum, i, i + j));
-					}
+			int[][] dp = new int[k][k];
+			for (int i = 1; i < k; i++) {
+				for (int s = 1; s + i < k; s++) {
+					int e = s + i;
+					dp[s][e] = Integer.MAX_VALUE;
+					for (int m = s; m < e; m++)
+						dp[s][e] = Math.min(dp[s][e], dp[s][m] + dp[m + 1][e] + sum[e] - sum[s - 1]);
 				}
 			}
+
+			sb.append(dp[1][k - 1]).append("\n");
 		}
 
-		return dp[0][dp.length - 1];
+		bw.write(sb.toString());
+		bw.flush();
 	}
-	
-	private static int sumDist(int[] sum, int start, int end) {
-		if (start == 0) {
-			return sum[end];
-		}
 
-		return sum[end] - sum[start - 1];
+	private static int read() throws IOException {
+		int c, n = System.in.read() & 15;
+		while ((c = System.in.read()) > 32) n = (n << 3) + (n << 1) + (c & 15);
+
+		return n;
 	}
-	
+
 }
