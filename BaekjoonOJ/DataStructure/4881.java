@@ -15,12 +15,8 @@ public class Main {
             sb.append(a).append(" ").append(b).append(" ");
 
             List<Integer> A = new ArrayList<>(), B = new ArrayList<>();
-
-            A.add(a);
-            while (!A.contains(a = generate(a))) A.add(a);
-
-            B.add(b);
-            while (!B.contains(b = generate(b))) B.add(b);
+            do A.add(a); while (!A.contains(a = generate(a)));
+            do B.add(b); while (!B.contains(b = generate(b)));
 
             sb.append(compare(A, B)).append("\n");
         }
