@@ -27,9 +27,6 @@ public class Main {
             for (int j = 0; j < x; j++) {
                 char c = s.charAt(j);
                 switch (c) {
-                    case '.':
-                        mat[i][j] = 0;
-                        break;
                     case '*':
                         mat[i][j] = -1;
                         break;
