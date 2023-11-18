@@ -8,10 +8,9 @@ import java.util.StringTokenizer;
 public class Main {
 
     static int r, c, max;
-    static char[][] map;
+    static char[][] mat;
     static boolean[] visit;
-    static int[] dy = {-1, 1, 0, 0};
-    static int[] dx = {0, 0, -1, 1};
+    static int[][] dir = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -21,20 +20,22 @@ public class Main {
         r = Integer.parseInt(st.nextToken());
         c = Integer.parseInt(st.nextToken());
 
-        map = new char[r][c];
-        visit = new boolean[26];
+        if (r == 1 && c == 1) max = 1;
+        else {
+            mat = new char[r][c];
+            visit = new boolean[26];
+            for (int i = 0; i < r; i++) mat[i] = br.readLine().toCharArray();
 
-        for (int i = 0; i < r; i++)
-            map[i] = br.readLine().toCharArray();
+            recur(0, 0, 0);
+        }
 
-        recur(0, 0, 0);
 
         bw.write(String.valueOf(max));
         bw.flush();
     }
 
     private static void recur(int y, int x, int cnt) {
-        int idx = map[y][x] - 'A';
+        int idx = mat[y][x] - 'A';
 
         if (visit[idx]) {
             max = Math.max(max, cnt);
@@ -42,12 +43,9 @@ public class Main {
         }
 
         visit[idx] = true;
-        for (int i = 0; i < 4; i++) {
-            int ny = y + dy[i];
-            int nx = x + dx[i];
-
-            if (ny >= 0 && nx >= 0 && ny < r && nx < c)
-                recur(ny, nx, cnt + 1);
+        for (int[] d : dir) {
+            int ny = y + d[0], nx = x + d[1];
+            if (ny >= 0 && ny < r && nx >= 0 && nx < c) recur(ny, nx, cnt + 1);
         }
         visit[idx] = false;
     }
