@@ -1,76 +1,65 @@
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
-import java.util.StringTokenizer;
 
 public class Main {
 
-    static int n;
-    static List<Integer>[] graph;
+    static Node[] graph;
+    static boolean[] visit;
+    static int[] cnt;
 
     public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        StringTokenizer st = new StringTokenizer(br.readLine());
+        StringBuilder sb = new StringBuilder();
 
-        n = Integer.parseInt(st.nextToken());
-        int m = Integer.parseInt(st.nextToken());
+        int n = read(), m = read();
 
-        graph = new ArrayList[n + 1];
-        for (int i = 0; i <= n; i++)
-            graph[i] = new ArrayList<>();
+        graph = new Node[n + 1];
+        for (int i = 1; i <= n; i++) graph[i] = new Node(i);
+        for (int i = 0; i < m; i++) graph[read()].addEdge(read());
 
-        for (int i = 0; i < m; i++) {
-            st = new StringTokenizer(br.readLine());
-            int dest = Integer.parseInt(st.nextToken());
-            int src = Integer.parseInt(st.nextToken());
+        cnt = new int[n + 1];
+        for (int i = 1; i <= n; dfs(i++)) visit = new boolean[n + 1];
 
-            graph[src].add(dest);
-        }
-
-        int[] result = new int[n + 1];
         int max = 0;
-        for (int i = 1; i <= n; i++) {
-            int cnt = bfs(i);
-            result[i] = cnt;
-            max = Math.max(max, cnt);
-        }
+        for (int i = 1; i <= n; i++) max = Math.max(max, cnt[i]);
+        for (int i = 1; i <= n; i++) if (cnt[i] == max) sb.append(i).append(" ");
 
-        for (int i = 1; i <= n; i++) {
-            if (result[i] == max)
-                bw.write(i + " ");
-        }
-
+        bw.write(sb.toString());
         bw.flush();
     }
 
-    private static int bfs(int root) {
-        Queue<Integer> q = new LinkedList<>();
-        q.offer(root);
-
-        boolean[] visit = new boolean[n + 1];
-        visit[root] = true;
-
-        int cnt = 0;
-        while (!q.isEmpty()) {
-            int src = q.poll();
-
-            for (int dest : graph[src]) {
-                if (!visit[dest]) {
-                    visit[dest] = true;
-                    cnt++;
-                    q.offer(dest);
-                }
+    private static void dfs(int src) {
+        visit[src] = true;
+        for (int tgt : graph[src].adj) {
+            if (!visit[tgt]) {
+                cnt[tgt]++;
+                dfs(tgt);
             }
         }
+    }
 
-        return cnt;
+    private static class Node {
+        int src;
+        List<Integer> adj;
+
+        Node(int src) {
+            this.src = src;
+            this.adj = new ArrayList<>();
+        }
+
+        public void addEdge(int tgt) {
+            adj.add(tgt);
+        }
+    }
+
+    private static int read() throws IOException {
+        int c, n = System.in.read() & 15;
+        while ((c = System.in.read()) > 32) n = (n << 3) + (n << 1) + (c & 15);
+
+        return n;
     }
 
 }
