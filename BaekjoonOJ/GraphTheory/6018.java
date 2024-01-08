@@ -17,10 +17,7 @@ public class Main {
 
         while (m-- > 0) union(read(), read());
 
-        while (q-- > 0) {
-            if (find(read()) == find(read())) sb.append("Y\n");
-            else sb.append("N\n");
-        }
+        while (q-- > 0) sb.append(find(read()) == find(read()) ? "Y\n" : "N\n");
 
         bw.write(sb.toString());
         bw.flush();
