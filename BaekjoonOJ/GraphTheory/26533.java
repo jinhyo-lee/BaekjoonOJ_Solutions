@@ -13,32 +13,32 @@ public class Main {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
         int n = Integer.parseInt(br.readLine());
-        boolean[][] arr = new boolean[n][n];
+        boolean[][] mat = new boolean[n][n];
         for (int i = 0; i < n; i++) {
             String s = br.readLine();
-            for (int j = 0; j < n; j++) arr[i][j] = s.charAt(j) == 'x';
+            for (int j = 0; j < n; j++) mat[i][j] = s.charAt(j) == 'x';
         }
 
-        bw.write(bfs(arr));
+        bw.write(bfs(mat));
         bw.flush();
     }
 
-    private static String bfs(boolean[][] arr) {
+    private static String bfs(boolean[][] mat) {
         Queue<Pair> q = new ArrayDeque<>();
         q.offer(new Pair(0, 0));
-        arr[0][0] = true;
+        mat[0][0] = true;
 
         int[][] dir = {{1, 0}, {0, 1}};
         while (!q.isEmpty()) {
             Pair cur = q.poll();
-            if (cur.y == arr.length - 1 && cur.x == arr[0].length - 1) return "Yes";
+            if (cur.y == mat.length - 1 && cur.x == mat.length - 1) return "Yes";
 
             for (int[] d : dir) {
                 int ny = cur.y + d[0], nx = cur.x + d[1];
-                if (ny < 0 || ny >= arr.length || nx < 0 || nx >= arr.length || arr[ny][nx]) continue;
+                if (ny < 0 || ny >= mat.length || nx < 0 || nx >= mat.length || mat[ny][nx]) continue;
 
                 q.offer(new Pair(ny, nx));
-                arr[ny][nx] = true;
+                mat[ny][nx] = true;
             }
         }
 
