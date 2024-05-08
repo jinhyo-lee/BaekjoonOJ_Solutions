@@ -6,7 +6,7 @@ import java.io.OutputStreamWriter;
 
 public class Main {
 
-    static boolean[][] arr;
+    static boolean[][] mat;
     static int[][] dir = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}, {-1, -1}, {-1, 1}, {1, 1}, {1, -1}};
 
     public static void main(String[] args) throws IOException {
@@ -18,16 +18,16 @@ public class Main {
         String s;
         while ((s = br.readLine()) != null) {
             int n = Integer.parseInt(s);
-            arr = new boolean[n][n];
+            mat = new boolean[n][n];
             for (int i = 0; i < n; i++) {
                 s = br.readLine();
-                for (int j = 0; j < n; j++) arr[i][j] = s.charAt(j) == '1';
+                for (int j = 0; j < n; j++) mat[i][j] = s.charAt(j) == '1';
             }
 
             int cnt = 0;
             for (int i = 0; i < n; i++) {
                 for (int j = 0; j < n; j++) {
-                    if (arr[i][j]) {
+                    if (mat[i][j]) {
                         dfs(i, j);
                         cnt++;
                     }
@@ -42,11 +42,11 @@ public class Main {
     }
 
     private static void dfs(int y, int x) {
-        arr[y][x] = false;
+        mat[y][x] = false;
 
         for (int[] dir : dir) {
             int ny = y + dir[0], nx = x + dir[1];
-            if (ny < 0 || ny >= arr.length || nx < 0 || nx >= arr.length || !arr[ny][nx]) continue;
+            if (ny < 0 || ny >= mat.length || nx < 0 || nx >= mat.length || !mat[ny][nx]) continue;
 
             dfs(ny, nx);
         }
