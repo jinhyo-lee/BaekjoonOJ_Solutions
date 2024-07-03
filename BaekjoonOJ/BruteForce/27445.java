@@ -4,22 +4,23 @@ import java.io.OutputStreamWriter;
 
 public class Main {
 
-    static int n, m;
     static Node[] arr;
 
     public static void main(String[] args) throws IOException {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        arr = new Node[(n = read()) + (m = read()) - 1];
+        int n = read(), m = read();
+        arr = new Node[n + m - 1];
+
         int i = 0;
         for (int j = 1; j <= n; j++) arr[i++] = new Node(j, 1, read());
         for (int j = 2; j <= m; j++) arr[i++] = new Node(n, j, read());
 
-        bw.write(search());
+        bw.write(search(n, m));
         bw.flush();
     }
 
-    private static String search() {
+    private static String search(int n, int m) {
         for (int i = 1; i <= n; i++) for (int j = 1; j <= m; j++) if (measure(i, j)) return i + " " + j;
 
         return "";
