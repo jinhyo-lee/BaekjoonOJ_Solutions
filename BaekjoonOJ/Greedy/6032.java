@@ -34,8 +34,7 @@ public class Main {
 
         @Override
         public int compareTo(Pair o) {
-            double r = o.r - this.r;
-            return r < 0 ? -1 : r > 0 ? 1 : 0;
+            return Double.compare(o.r, this.r);
         }
     }
 
