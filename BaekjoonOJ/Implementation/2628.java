@@ -2,7 +2,6 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -11,7 +10,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        List<Integer> col = new ArrayList<>(Arrays.asList(0, read())), row = new ArrayList<>(Arrays.asList(0, read()));
+        List<Integer> col = new ArrayList<>(Collections.singletonList(read())), row = new ArrayList<>(Collections.singletonList(read()));
         int n = read();
         while (n-- > 0) {
             if (read() == 0) row.add(read());
@@ -21,10 +20,10 @@ public class Main {
         Collections.sort(row);
         Collections.sort(col);
 
-        int y = 0;
+        int y = row.get(0);
         for (int i = 1; i < row.size(); i++) y = Math.max(y, row.get(i) - row.get(i - 1));
 
-        int x = 0;
+        int x = col.get(0);
         for (int i = 1; i < col.size(); i++) x = Math.max(x, col.get(i) - col.get(i - 1));
 
         bw.write(String.valueOf(y * x));
