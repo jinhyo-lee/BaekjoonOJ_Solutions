@@ -26,7 +26,7 @@ public class Main {
     }
 
     private static void sieve() {
-        nonPrime[0] = nonPrime[1] = true;
+        nonPrime[1] = true;
 
         double sqrt = Math.sqrt(nonPrime.length);
         for (int i = 2; i < sqrt; i++)
