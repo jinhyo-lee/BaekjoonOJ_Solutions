@@ -38,7 +38,7 @@ public class Main {
                 graph[map.get(u)].adj.add(new Pair(v, Integer.parseInt(st.nextToken())));
             }
 
-            dfs("Ted", 0);
+            dfs("Ted", 100);
             Collections.sort(list);
 
             sb.append("DATASET ").append(tc).append("\n");
@@ -52,10 +52,10 @@ public class Main {
         bw.flush();
     }
 
-    private static void dfs(String src, int cnt) {
+    private static void dfs(String src, int age) {
         for (Pair tgt : graph[map.get(src)].adj) {
-            list.add(new Pair(tgt.s, 100 - cnt - tgt.i));
-            dfs(tgt.s, cnt + tgt.i);
+            list.add(new Pair(tgt.s, age - tgt.i));
+            dfs(tgt.s, age - tgt.i);
         }
     }
 
