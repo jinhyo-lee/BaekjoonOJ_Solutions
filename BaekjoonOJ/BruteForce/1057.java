@@ -8,12 +8,8 @@ public class Main {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
         read();
-        int a = read(), b = read(), i = 0;
-        while (a != b) {
-            a -= a / 2;
-            b -= b / 2;
-            i++;
-        }
+        int a = read(), b = read(), i = 1;
+        while ((a -= a / 2) != (b -= b / 2)) i++;
 
         bw.write(String.valueOf(i));
         bw.flush();
