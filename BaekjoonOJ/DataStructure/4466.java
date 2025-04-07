@@ -17,11 +17,9 @@ public class Main {
         int x = Integer.parseInt(br.readLine());
         for (int i = 1; i <= x; i++) {
             String s = br.readLine();
-            for (char c : s.substring(0, s.indexOf(' ')).toCharArray())
-                stk.push(c == ')' ? evaluation() ? 't' : 'f' : c);
+            for (char c : s.substring(0, s.indexOf(' ')).toCharArray()) stk.push(c == ')' ? evaluate() ? 't' : 'f' : c);
 
-            if (stk.size() == 2) stk.push(stk.pop() == 't' ? 'f' : 't');
-            sb.append(i).append(": ").append(stk.pop() == s.substring(s.indexOf(' ') + 3).charAt(0) ? "Good" : "Bad").append(" brain\n");
+            sb.append(i).append(": ").append((stk.size() == 1 ? stk.pop() : stk.pop() == 't' ? 'f' : 't') == s.charAt(s.length() - 1) ? "Good" : "Bad").append(" brain\n");
             stk.clear();
         }
 
@@ -29,7 +27,7 @@ public class Main {
         bw.flush();
     }
 
-    private static boolean evaluation() {
+    private static boolean evaluate() {
         StringBuilder sb = new StringBuilder();
         char c;
         while ((c = stk.pop()) != '(') sb.append(c);
