@@ -22,8 +22,8 @@ public class Main {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 if (mat[i][j]) continue;
-                if (i + d <= mat.length && traverse(i, j, d, 1, 0)) cnt++;
-                if (j + d <= mat[0].length && traverse(i, j, d, 0, 1)) cnt++;
+                if (i + d <= n && traverse(i, j, d, 1, 0)) cnt++;
+                if (j + d <= m && traverse(i, j, d, 0, 1)) cnt++;
             }
         }
 
