@@ -13,17 +13,15 @@ public class Main {
         mat = new int[n][5];
         for (int i = 0; i < n; i++) for (int j = 0; j < 5; j++) mat[i][j] = read();
 
-        int[] arr = new int[n];
-        for (int i = 0; i < n; i++) {
-            int[] tmp = new int[5];
-            System.arraycopy(mat[i], 0, tmp, 0, 5);
-            for (int j = 0; j < n; j++) if (j != i && search(tmp, j)) arr[i]++;
-        }
-
         int max = 0, res = 0;
         for (int i = 0; i < n; i++) {
-            if (max < arr[i]) {
-                max = arr[i];
+            int[] arr = new int[5];
+            System.arraycopy(mat[i], 0, arr, 0, 5);
+
+            int cnt = 0;
+            for (int j = 0; j < n; j++) if (j != i && search(arr, j)) cnt++;
+            if (max < cnt) {
+                max = cnt;
                 res = i;
             }
         }
@@ -32,8 +30,8 @@ public class Main {
         bw.flush();
     }
 
-    private static boolean search(int[] tmp, int j) {
-        for (int k = 0; k < 5; k++) if (tmp[k] == mat[j][k]) return true;
+    private static boolean search(int[] arr, int j) {
+        for (int k = 0; k < 5; k++) if (arr[k] == mat[j][k]) return true;
         return false;
     }
 
