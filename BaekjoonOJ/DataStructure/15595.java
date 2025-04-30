@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class Main {
 
-    static StringBuilder s = new StringBuilder();
+    static StringBuilder sb = new StringBuilder();
 
     public static void main(String[] args) throws IOException {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -39,11 +39,11 @@ public class Main {
     }
 
     private static String readStr() throws IOException {
-        s.setLength(0);
+        sb.setLength(0);
         int c;
-        while ((c = System.in.read()) > 47) s.append((char) c);
+        while ((c = System.in.read()) > 47) sb.append((char) c);
 
-        return s.toString();
+        return sb.toString();
     }
 
     private static void skip() throws IOException {
