@@ -11,11 +11,8 @@ public class Main {
         int t = read();
         while (t-- > 0) {
             int n = read();
-            char[][] mat = new char[n][n];
-            for (int i = 0; i < n; i++)
-                for (int j = 0; j < n; j++) mat[i][j] = i == 0 || j == 0 || i == n - 1 || j == n - 1 ? '#' : 'J';
-
-            for (int i = 0; i < n; i++, sb.append('\n')) for (int j = 0; j < n; j++) sb.append(mat[i][j]);
+            for (int i = 0; i < n; i++, sb.append('\n'))
+                for (int j = 0; j < n; j++) sb.append(i == 0 || j == 0 || i == n - 1 || j == n - 1 ? '#' : 'J');
             sb.append('\n');
         }
 
