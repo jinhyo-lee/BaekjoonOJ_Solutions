@@ -22,19 +22,19 @@ public class Main {
         bw.flush();
     }
 
+    private static int read() throws IOException {
+        int c, n = System.in.read() & 15;
+        while ((c = System.in.read()) > 32) n = (n << 3) + (n << 1) + (c & 15);
+
+        return n;
+    }
+
     private static String readStr() throws IOException {
         sb.setLength(0);
         int c;
         while ((c = System.in.read()) > 47) sb.append((char) c);
 
         return sb.toString();
-    }
-
-    private static int read() throws IOException {
-        int c, n = System.in.read() & 15;
-        while ((c = System.in.read()) > 32) n = (n << 3) + (n << 1) + (c & 15);
-
-        return n;
     }
 
 }
