@@ -7,8 +7,8 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        int n = read(), m = n / 4, cnt = 0;
-        for (int i = 0; i <= m; i++) if ((n - i * 4) % 5 == 0) cnt++;
+        int n = read(), i = n / 4, cnt = 0;
+        while (i >= 0) if ((n - i-- * 4) % 5 == 0) cnt++;
 
         bw.write(String.valueOf(cnt));
         bw.flush();
