@@ -8,7 +8,7 @@ public class Main {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
         int n = read(), a = read(), b = read(), cnt = 0;
-        do if (n % a == 0 && n % b != 0 || n % a != 0 && n % b == 0) cnt++; while (n-- > 0);
+        do if (n % a == 0 ^ n % b == 0) cnt++; while (n-- > 0);
 
         bw.write(String.valueOf(cnt));
         bw.flush();
