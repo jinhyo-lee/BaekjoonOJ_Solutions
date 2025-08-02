@@ -9,10 +9,10 @@ public class Main {
 
         int n = read();
         int[] arr = new int[n];
-        for (int i = 0; i < n; i++) arr[i] = read();
+        while (n-- > 0) arr[n] = read();
 
         long sum = 0;
-        for (int i = n - 1, j = arr[n - 1]; i >= 0; i--, sum += j) if (arr[i] < j) j = arr[i];
+        for (int i = 0, j = arr[0]; i < arr.length; i++, sum += j) if (arr[i] < j) j = arr[i];
 
         bw.write(String.valueOf(sum));
         bw.flush();
