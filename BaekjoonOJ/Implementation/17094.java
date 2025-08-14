@@ -10,14 +10,11 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        int n = Integer.parseInt(br.readLine()), a = 0, b = 0;
+        int n = Integer.parseInt(br.readLine()), cnt = 0;
         String s = br.readLine();
-        for (int i = 0; i < n; i++) {
-            if (s.charAt(i) == '2') a++;
-            else b++;
-        }
+        for (int i = 0; i < n; i++) if (s.charAt(i) == '2') cnt++;
 
-        bw.write(a == b ? "yee" : a > b ? "2" : "e");
+        bw.write(cnt == (n -= cnt) ? "yee" : cnt > n ? "2" : "e");
         bw.flush();
     }
 
