@@ -1,0 +1,29 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.StringTokenizer;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int[] arr = new int[Integer.parseInt(st.nextToken())];
+        int k = Integer.parseInt(st.nextToken());
+
+        st = new StringTokenizer(br.readLine());
+        for (int i = 0; i < arr.length; i++) arr[i] = Integer.parseInt(st.nextToken());
+
+        int max = -2147483647, sum = 0;
+        for (int i = arr.length - k; i >= 0; i--, max = Math.max(max, sum), sum = 0)
+            for (int j = i + k - 1; j >= i; j--) sum += arr[j];
+
+        bw.write(String.valueOf(max));
+        bw.flush();
+    }
+
+}
