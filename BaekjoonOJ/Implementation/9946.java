@@ -13,8 +13,8 @@ public class Main {
 
         int t = 0;
         String s;
-        while (!(s = br.readLine()).equals("END"))
-            sb.append("Case ").append(++t).append(isSame(s.toLowerCase(), br.readLine().toLowerCase()) ? ": same\n" : ": different\n");
+        while ((s = br.readLine()).charAt(0) != 'E')
+            sb.append("Case ").append(++t).append(isSame(s, br.readLine()) ? ": same\n" : ": different\n");
 
         bw.write(sb.toString());
         bw.flush();
