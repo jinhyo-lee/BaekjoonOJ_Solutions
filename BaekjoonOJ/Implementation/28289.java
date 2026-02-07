@@ -12,8 +12,7 @@ public class Main {
         int p = read();
         while (p-- > 0) {
             int g = read(), c = read();
-            if (g > 1) arr[c == 1 || c == 2 ? 0 : c == 3 ? 1 : 2]++;
-            else arr[3]++;
+            arr[g > 1 ? c == 1 || c == 2 ? 0 : c == 3 ? 1 : 2 : 3]++;
             read();
         }
 
@@ -29,6 +28,5 @@ public class Main {
 
         return n;
     }
-
 
 }
